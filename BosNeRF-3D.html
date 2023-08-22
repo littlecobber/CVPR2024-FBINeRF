@@ -1,0 +1,473 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Chiller&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=TimesNewRoman&display=swap" rel="stylesheet">
+
+    <style>
+        .spanning-image {
+            position: absolute;
+            top: 120px; /* 调整图片的垂直位置 */
+            left: 46%;
+            width: 70%;
+            z-index: 1; /* 将图片叠放在内容之上 */
+        }
+
+        .spanning-image img {
+            max-width: 5%; /* 调整图片的最大宽度，使其缩小 */
+            padding: 0px;
+        }
+
+        .red-text {
+            color: red;
+        }
+
+        .white-text {
+            color: white;
+        }
+
+        .navbar-brand {
+            font-family: 'Times New Roman', cursive; /* Use the imported font */
+            font-size: 3em;
+            /* Other styles for the navbar-brand */
+        }
+
+        .navbar-nav {
+            margin-left: auto;
+        }
+        .full-justify {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        /* Add spacing between rows */
+        .video-row {
+            margin-bottom: 20px;
+        }
+
+        .video-description {
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .video-container {
+            width: 100%; /* Set the width of the video container */
+            position: relative;
+            padding-bottom: 56.25%; /* Maintain a 16:9 aspect ratio */
+        }
+
+            .video-container video {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+            }
+
+        .audio-container {
+            background-color: #006400;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Keep the alignment at the top */
+        }
+
+        .bullet-list {
+            list-style-type: none;
+            padding-left: 0;
+            text-align: justify;
+        }
+
+            .bullet-list li {
+                position: relative;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+                .bullet-list li:before {
+                    content: "\2022";
+                    position: absolute;
+                    left: 0;
+                }
+
+        body {
+            overflow: hidden;
+        }
+
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, #000, #fff);
+        }
+
+        .gradient-text {
+            font-size: 120px;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeIn 4s forwards;
+            animation-delay: 1s; /* 等待1秒钟后开始动画 */
+            height: 40vh; /* 设置合适的高度 */     
+        }
+
+        .art-text {
+            font-family: 'Bradley Hand ITC', cursive;
+        }
+
+        .text-clip {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, #00b4db, #0083b0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            white-space: nowrap;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .content {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+            .content.show {
+                opacity: 1;
+            }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var preloader = document.getElementById("preloader");
+            var content = document.getElementById("content");
+
+            setTimeout(function () {
+                content.classList.add("show");
+
+                setTimeout(function () {
+                    preloader.style.display = "none";
+                }, 1000);
+            }, 5000);
+        });
+    </script>
+</head>
+<body class="overflow-auto">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <div id="preloader">
+        <div class="gradient-text art-text">
+            <span class="red-text">Bos</span><span class="white-text">NeRF</span>
+        </div>
+    </div>
+    <div class="audio-container">
+        <audio controls autoplay loop hidden>
+            <source src="shots.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <div id="content" class="content">
+        <!-- 在这里放置网站内容 -->
+        <!-- Navbar -->
+        <!-- Navbar -->
+        <div class="audio-container">
+            <audio controls autoplay loop>
+                <source src="shots.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
+            <div class="container">
+                <a class="navbar-brand" href="#"><span class="red-text">Bos</span><span class="white-text">NeRF</span></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-start" id="navmenu">
+                    <!-- 使用 justify-content-start 类 -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#learn">Introduction</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#questions">Questions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#instructors">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="spanning-image">
+            <img src="img/medal.png" alt="Spanning Image">
+        </div>
+
+        <!-- Showcase -->
+        <section class="bg-dark text-light p-5 text-center">
+            <div class="container">
+                <div class="d-sm-flex">
+                    <div>
+                        <h1><span class="text-warning">NeRF</span>- A New Era for 3D reconstruction</h1>
+                        <p class="lead my-4">
+                            <ul class="bullet-list">
+                                <div class="mb-4">
+                                <li>
+                                    BosNeRF focus on improving the current NeRF algorithms in terms of accuracy, speed, and
+                                    also artifacts mitigating.
+                                </li>
+                    </div>
+                    <div class="mb-4">
+                        <li>
+                            BosNeRF are supervised by SOTA depth estimation methods with both relative depth estimation
+                            and matric depth.
+                        </li>
+                    </div>
+                    <div class="mb-4">
+                        <li>
+                            Flexible Bundle Adjusting can be used to establish more complicated camera poses model, including
+                            distortion, rotation, translation or even calibration. Compared to original NeRF, BosNeRF can deal
+                            with imperfect camera initialization and has a better generalization ability.
+                        </li>
+                    </div>
+                    </ul>
+                    </p>
+                    <button class="btn btn-primary btn-lg">Embark on the Journey!</button>
+                </div>
+                <img class="img-fluid w-50 d-sm-block" src="img/Bos4.jpg" alt="" />
+            </div>
+    </div>
+        </section>
+
+        <!-- Videos-->
+        <div class="container mt-5">
+            <h1 class="main-title">Video Examples</h1>
+            <div class="row video-row">
+                <div class="col-md-6">
+                    <div class="video-container">
+                        <video controls autoplay loop>
+                            <source src="BU.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="video-description">BU Central Chapel</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="video-container">
+                        <video controls autoplay loop>
+                            <source src="garden.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="video-description">Garden</div>
+                </div>
+            </div>
+            <div class="row video-row">
+                <div class="col-md-6">
+                    <div class="video-container">
+                        <video controls autoplay loop>
+                            <source src="pinecone.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="video-description">Pinecone</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="video-container">
+                        <video controls autoplay loop>
+                            <source src="stump.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="video-description">Stump</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Boxes-->
+        <section id="instructors" class="p-5">
+            <div class="container">
+                <div class="row text-center g-4">
+                    <div class="col-md">
+                        <div class="card bg-dark text-light">
+                            <div class="card-body text-center">
+                                <div class="h1 mb-3">
+                                    <i class="bi bi-laptop"></i>
+                                </div>
+                                <h3 class="card-title mb-3">
+                                    Research
+                                </h3>
+                                <p class="card-text">
+                                    This project is funded by VIP Lab at BU
+                                </p>
+                                <a href="https://vip.bu.edu/" class="btn btn-light">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="card bg-secondary text-light">
+                            <div class="card-body text-center">
+                                <div class="h1 mb-3">
+                                    <i class="bi bi-person-square"></i>
+                                </div>
+                                <h3 class="card-title mb-3">
+                                    Suggestion
+                                </h3>
+                                <p class="card-text">
+                                    Any suggestions please email:<strong>wuyifan1@bu.edu</strong>
+                                </p>
+                                <a href="#learn" class="btn btn-dark">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="card bg-dark text-light">
+                            <div class="card-body text-center">
+                                <div class="h1 mb-3">
+                                    <i class="bi bi-people"></i>
+                                </div>
+                                <h3 class="card-title mb-3">
+                                    Contact
+                                </h3>
+                                <p class="card-text">
+                                    Phone number: 617-870-9849
+                                </p>
+                                <a href="#instructors" class="btn btn-light">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learn Sections -->
+        
+            <section id="learn" class="p-5">
+                <div class="container">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-md">
+                            <img src="img/illustration.png" class="img-fluid" alt="">
+                        </div>
+                        <div class="col-md p-5">
+                            <h2>Point Cloud</h2>
+                            <p class="lead full-justify">
+                                Compared to traditional struction from motion method, BosNeRF spends quite less amounts of time
+                                for camera pose optimization. BosNeRF provides a continuous volumetric representation of a scene, allowing
+                                for <strong>high-resolution</strong> and <strong>accurate</strong> point cloud generation with fine details.NeRF captures <strong>both geometry and
+                                appearance information</strong>, resulting in more visually realistic point clouds that include color and shading details. BosNeRF can also model complex scenes, including scenes with non-Lambertian materials and varying lighting conditions, resulting in more <strong>versatile</strong> point cloud generation.
+                            </p>
+                            <a href="#" class="btn btn-light mt-3">
+                                <i class="bi bi-chevron-right"></i> Read More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        <!-- Learn Sections 2 -->
+ 
+        
+            <section id="learn" class="p-5 bg-dark text-light">
+                <div class="container">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-md">
+                            <h2>Flexible Bundle Adjusting</h2>
+                            <p class="lead full-justify">
+                                FBA can handle scenes with varying lighting conditions, partial occlusions, and challenging camera poses. It can refine camera poses
+                                and scene geometry more accurately even in cases where the initial estimates are not very accurate. It is also able to can refine 
+                                intrinsic camera parameters (such as focal length, principal point, lens distortion) and extrinsic parameters (rotation and translation) simultaneously. This ensures the camera's calibration is accurate, which is crucial for achieving precise measurements and reconstructions.
+                            </p>
+                            <a href="#" class="btn btn-light mt-3">
+                                <i class="bi bi-chevron-right"></i> Read More
+                            </a>
+                        </div>
+                        <div class="col-md p-5">
+                            <div class="chiller-text">
+                                <h1 class="display-1" style="font-family: 'Chiller', cursive;">BosNeRF-3D</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+        <!-- Question Accordion-->
+
+        <section id="questions" class="p-5">
+                <div class="container">
+                    <h2 class="text-center mb-4">Frequently Asked Questions</h2>
+                    <div class="accordion accordion-flush" id="questions">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question-one" aria-expanded="false" aria-controls="question-one">
+                                    What are the advantages of BosNeRF?
+                                </button>
+                            </h2>
+                            <div id="question-one" class="accordion-collapse collapse" data-bs-parent="#questions">
+                                <div class="accordion-body" style="text-align: justify;">
+                                    <div class="accordion-body">
+                                        BosNeRF has a <strong>better generalization ability</strong> compared to other depth-supervised NeRF methods; while it can be used for
+                                        further application with absolute value of depth estimation. Moreover, flexible bundle adjusting helps to enhence <strong>robustness</strong> of BosNeRF and allows
+                                        to establish more complex models that close to situations in <strong>reality</strong>.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question-two" aria-expanded="false" aria-controls="question-two">
+                                        What is the insufficiency of BosNeRF?
+                                    </button>
+                                </h2>
+                                <div id="question-two" class="accordion-collapse collapse" data-bs-parent="#questions">
+                                    <div class="accordion-body" style="text-align: justify;">
+                                        <div class="accordion-body">
+                                            The increased complexity often leads to <strong>higher computational</strong> demands, making flexible bundle adjustment more resource-intensive
+                                            and time-consuming. How to strike a balance and make most of flexible bundle adjustment stills needs to be discussed. Moreover, initializing non-rigid deformations
+                                            and transformations accurately can be challenging, and incorrect initializations can lead to convergence issues or inaccurate results.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question-three" aria-expanded="false" aria-controls="question-three">
+                                            What is our future plan?
+                                        </button>
+                                    </h2>
+                                    <div id="question-three" class="accordion-collapse collapse" data-bs-parent="#questions">
+                                        <div class="accordion-body" style="text-align: justify;">
+                                            <div class="accordion-body">Our <strong>future work</strong> lies on adding anti-aliasing, simplifying algorithm complexity, and increasing training speed. Making flexible bundle adjustment more resource-intensive and time-consuming. </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+        </section>
+
+
+
+    </div>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+</html>
